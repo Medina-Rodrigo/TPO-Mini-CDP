@@ -20,4 +20,10 @@ class Profile(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
+    # Normalized email. unique=True makes Postgres itself reject duplicates
+    # It's optimal because an app user_id we've never seen still
+    # gets a profile before we know their email
+    # Postgres allows many NULLs in a unique column, so that's safe
+    email: Mapped[str | None] = mapped_column(String(320), unique = True)
+
     
