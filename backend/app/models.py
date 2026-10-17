@@ -11,12 +11,12 @@ from datetime import date, datetime
 
 from sqlalchemy import Date, DateTime, ForeignKey, String, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import Mapped, mapped_column, relationships
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
 
 class Profile(Base):
-    __tablename__=:"profiles"
+    __tablename__= "profiles"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -63,9 +63,9 @@ class Event(Base):
     id: Mapped[int] = mapped_column(primary_key = True)
 
     # Anonymous events are stored now and attached to a profile later
-    profile_id: Mapped[int | None] = mapped_column(ForiegnKey("profiles.id"), index = True)
+    profile_id: Mapped[int | None] = mapped_column(ForeignKey("profiles.id"), index = True)
 
-    source Mapped[str] = mapped_column(String(10)) # web or app
+    source:  Mapped[str] = mapped_column(String(10)) # web or app
     event_type: Mapped[str] = mapped_column(String(30)) # page_view, read_story, etc
 
     # When it happened according to the data
@@ -89,4 +89,3 @@ class Event(Base):
 
     profile: Mapped[Profile | None] = relationship(back_populates = "events")
 
-    
