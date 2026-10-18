@@ -69,7 +69,7 @@ class Event(Base):
     event_type: Mapped[str] = mapped_column(String(30)) # page_view, read_story, etc
 
     # When it happened according to the data
-    occured_at: Mapped[datetime] = mapped_column(DateTime(timezone = True), index = True)
+    occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone = True), index = True)
 
     #The raw IDs the event arrived with, kept so it can be attached later
     visitor_id: Mapped[str | None] = mapped_column(String(100), index = True)
