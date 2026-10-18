@@ -27,7 +27,7 @@ def normalize_email(raw: str | None) -> str | None:
 
 # Different systems name the same channel differently: beehiiv says "X"
 # website UTMs say "twitter", we'll map aliases to one canonical lowercase name
-SOURCE ALIASES = {"twitter": "x"}
+SOURCE_ALIASES = {"twitter": "x"}
 
 def normalize_source(raw: str | None) -> str | None:
     if not isinstance(raw, str) or not raw.strip():
@@ -35,4 +35,4 @@ def normalize_source(raw: str | None) -> str | None:
     source = raw.strip().lower()
     # .get(key, default): use the alias if there is one, otherwise keep it
     return SOURCE_ALIASES.get(source, source)
-    
+

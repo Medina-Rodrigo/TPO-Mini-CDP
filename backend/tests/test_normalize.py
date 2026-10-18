@@ -1,6 +1,6 @@
 import pytest
 
-from app.normalize import normalize_email
+from app.normalize import normalize_email, normalize_source
 
 # Parametrize runs the same rest once per (input, expected) pair,
 # so each messy case from the real CSVs gets its own pass/fail line.
@@ -24,3 +24,11 @@ def test_valid_emails_are_cleaned(raw, expected):
 )
 def test_invalid_values_return_none(raw):
     assert normalize_email(raw) is None
+
+@pytest.mark.parametrize(
+    "raw, expected",
+    [("Instagram", "instagram"), ("instagram", "instagram"), ("X", "x"),
+    ("twitter", "x"), ("", None), (None, None)],
+)
+def test_sources_share_one_vocabulary(raw, expected):
+    assert normalize_source(raw) == expected
