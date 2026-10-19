@@ -1,4 +1,5 @@
 .venv/
 __pycache__/
 .env
-node_modules/*:Zone.Identifier
+node_modules/
+*:Zone.Identifier
